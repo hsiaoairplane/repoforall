@@ -8,6 +8,11 @@ if [ "$#" -lt 1 ]; then
 	exit
 fi
 
+if [ ! -e package.json ]; then
+	echo "Error: file package.json does not exist"
+	exit
+fi
+
 # repo list
 REPOLIST=`cat package.json | awk '{print $1}' | grep 'git@gitlab' | sed 's/"git@gitlab.dc.zyxel.com.tw:wlan-ap\///' | sed 's/.git"//'`
 
