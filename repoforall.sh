@@ -2,7 +2,7 @@ CYAN='\033[0;36m'
 NC='\033[0m'
 
 if [ "$#" -lt 1 ]; then
-	echo "help: gitforall <pattern>"
+	echo "help: repoforall <pattern>"
 	echo "      It will loop all repo. and execute <pattern>"
 	exit
 fi
