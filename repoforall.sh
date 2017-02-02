@@ -1,8 +1,9 @@
-CYAN='\033[0;36m'
-NC='\033[0m'
+RED='\e[7;31m' # Red color
+GREEN='\e[0;32m' # Green color
+NC='\e[0m' # No color
 
 if [ "$#" -lt 1 ]; then
-	echo "help: repoforall <pattern>"
+	echo "Help: repoforall <pattern>"
 	echo "      It will loop all repo. and execute <pattern>"
 	exit
 fi
@@ -11,13 +12,16 @@ fi
 REPOLIST=`cat package.json | awk '{print $1}' | grep 'git@gitlab' | sed 's/"git@gitlab.dc.zyxel.com.tw:wlan-ap\///' | sed 's/.git"//'`
 
 # loop repo list
-echo ============================== START ========================================
 for repo in $REPOLIST
 do
 	cd $repo
-	echo -e ${CYAN}"Entering repo" $repo".git"${NC}
+	echo -e ${GREEN}"Entering repo" $repo".git"${NC}
 	$*
+
+	if [ `echo $?` != 0 ]; then
+		break
+	fi
+
 	cd ..
 done
-echo =============================== END ========================================
 
