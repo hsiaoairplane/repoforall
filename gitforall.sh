@@ -8,14 +8,14 @@ if [ "$#" -lt 1 ]; then
 fi
 
 # repo list
-REPO_LIST=`cat package.json | awk '{print $1}' | grep 'git@gitlab' | sed 's/"git@gitlab.dc.zyxel.com.tw:wlan-ap\///' | sed 's/.git"//'`
+REPOLIST=`cat package.json | awk '{print $1}' | grep 'git@gitlab' | sed 's/"git@gitlab.dc.zyxel.com.tw:wlan-ap\///' | sed 's/.git"//'`
 
 # loop repo list
 echo ============================== START ========================================
-for repo in $REPO_LIST
+for repo in $REPOLIST
 do
 	cd $repo
-	echo -e ${CYAN}"#######" $repo "#######"${NC}
+	echo -e ${CYAN}"Entering repo" $repo".git"${NC}
 	$*
 	cd ..
 done
